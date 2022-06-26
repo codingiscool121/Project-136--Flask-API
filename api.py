@@ -1,5 +1,5 @@
 from flask import Flask, json,jsonify, request
-from data import data
+from starsData import data
 app=Flask(__name__)
 
 @app.route('/')
@@ -11,10 +11,11 @@ def index():
 
 def starinfo():
     star=request.args.get('star')
-    try:
-        star = next(item for item in data if item['name'] == star)
-        return jsonify(star)
-    except:
-        return jsonify({"error":"star not found"})
+    
+    star2 = next(item for item in data if item['Name'] == star) 
+    return jsonify({
+            "stardata": star2
+        })
+
 if __name__ == '__main__':
     app.run(debug=True)
